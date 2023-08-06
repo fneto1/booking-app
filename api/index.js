@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const authRoutes = require("./routes/auth");
 const hotelsRoutes = require("./routes/hotels");
 const roomsRoutes = require("./routes/rooms");
@@ -29,6 +30,10 @@ app.use(
   })
 );
 app.use(express.json());
+
+//Solve CORS
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/hotels", hotelsRoutes);
